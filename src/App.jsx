@@ -9,6 +9,13 @@ export default function App() {
   const apiURL = "https://randomuser.me/api/?results=240";
   const [dataIsLoaded, setDataIsLoaded] = useState(false);
   const [users, setUsers] = useState([]);
+  const [searchTerm, setSearchTerm] = useState("");
+
+  const filteredUsers = users.filter((user) => {
+    const fullName = `${user.name.first} ${user.name.last}`.toLowerCase();
+    const location = `${user.location.city} ${user.location.country}`.toLowerCase();
+    return fullName.includes(searchTerm.toLowerCase()) || location.includes(searchTerm.toLowerCase());
+  });
 
   useEffect(() => {
     fetch(apiURL)
@@ -21,18 +28,20 @@ export default function App() {
 
   return (
     <div className="app-wrapper">
-      <Topbar />
+      <Topbar searchTerm={searchTerm} setSearchTerm={setSearchTerm} />
 
       <div className="grid">
         {!dataIsLoaded && <Spinner />}
 
-        {dataIsLoaded && !users.length && (
+        {dataIsLoaded && !filteredUsers.length && (
           <p className="no-results">No results found</p>
         )}
 
         {dataIsLoaded &&
-          users.length > 0 &&
-          users.map((user) => <Card key={user.login.uuid} user={user} />)}
+          filteredUsers.length > 0 &&
+          filteredUsers.map((user) => (
+            <Card key={user.login.uuid} user={user} />
+          ))}
       </div>
 
       <Footer />
