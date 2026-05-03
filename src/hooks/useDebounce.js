@@ -9,8 +9,6 @@ export function useDebounce(callback, delay) {
     timeoutRef.current = setTimeout(() => {
       callback(value);
     }, delay);
-
-    console.log(value)
   };
 
   return debouncedFunction;
