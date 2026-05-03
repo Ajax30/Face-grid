@@ -17,12 +17,3 @@
   margin-top: -20px;
   margin-left: -20px;
 }
-
-.no-results {
-  grid-column: 1 / -1;
-  justify-self: center;
-}
-
-.no-results {
-  color: #565656;
-}

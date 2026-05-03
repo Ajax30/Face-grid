@@ -4,6 +4,7 @@
   width: 100%;
   flex-direction: column;
   align-items: center;
+  padding-top: 50px;
 }
 
 .grid {
@@ -31,4 +32,12 @@
   .grid {
     grid-template-columns: repeat(6, 1fr);
   }
+}
+
+.no-results {
+  width: 100%;
+  text-align: center;
+  grid-column: 1 / -1;
+  justify-self: center;
+  color: #565656;
 }
