@@ -14,7 +14,10 @@ export default function App() {
   const filteredUsers = users.filter((user) => {
     const fullName = `${user.name.first} ${user.name.last}`.toLowerCase();
     const location = `${user.location.city} ${user.location.country}`.toLowerCase();
-    return fullName.includes(searchTerm.toLowerCase()) || location.includes(searchTerm.toLowerCase());
+    return (
+      fullName.includes(searchTerm.toLowerCase()) ||
+      location.includes(searchTerm.toLowerCase())
+    );
   });
 
   useEffect(() => {
@@ -31,17 +34,15 @@ export default function App() {
       <Topbar searchTerm={searchTerm} setSearchTerm={setSearchTerm} />
 
       <div className="grid">
-        {!dataIsLoaded && <Spinner />}
-
-        {dataIsLoaded && !filteredUsers.length && (
+        {!dataIsLoaded ? (
+          <Spinner />
+        ) : filteredUsers.length === 0 ? (
           <p className="no-results">No results found</p>
-        )}
-
-        {dataIsLoaded &&
-          filteredUsers.length &&
+        ) : (
           filteredUsers.map((user) => (
             <Card key={user.login.uuid} user={user} />
-          ))}
+          ))
+        )}
       </div>
 
       <Footer />
