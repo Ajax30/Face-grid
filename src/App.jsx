@@ -38,7 +38,7 @@ export default function App() {
         )}
 
         {dataIsLoaded &&
-          filteredUsers.length > 0 &&
+          filteredUsers.length &&
           filteredUsers.map((user) => (
             <Card key={user.login.uuid} user={user} />
           ))}
